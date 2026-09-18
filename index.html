@@ -7,6 +7,8 @@
 
     <title>Reporte de ventas</title>
 
+    <link rel="icon" type="image/png" href="./splash_logo.png">
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -19,7 +21,7 @@
             margin: 0;
             padding: 30px;
             font-family: Arial, Helvetica, sans-serif;
-            background: #f5f6fa;
+            background: #edf1ff;
             color: #2f3542;
         }
 
@@ -155,6 +157,29 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .card-recaudo {
+            overflow: hidden;
+        }
+
+        .card-recaudo-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            height: 100%;
+        }
+
+        .card-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .card-recaudo-content > div { 
+            flex: 1; 
+        }
     </style>
 </head>
 
@@ -177,9 +202,21 @@
             <div id="totalVentas" class="card-value">0</div>
         </div>
 
-        <div class="card">
-            <div class="card-title">Vendedores</div>
-            <div id="totalVendedores" class="card-value">0</div>
+        <!-- <div class="card">
+            <div class="card-title">Total recaudado</div>
+            <div id="totalRecaudo" class="card-value">0</div>
+
+            <img src="./yape-logo.png"alt="Logo"class="card-logo">
+        </div> -->
+
+        <div class="card card-recaudo"> 
+            <div class="card-recaudo-content"> 
+                <div> 
+                    <div class="card-title">Total recaudado</div> 
+                    <div id="totalRecaudo" class="card-value">0</div>
+                </div>
+                <img src="./yape-logo.png" alt="Logo" class="card-logo"> 
+            </div>
         </div>
 
     </div>
@@ -375,8 +412,8 @@
         document.getElementById("totalTabla")
             .textContent = totalGeneral;
 
-        document.getElementById("totalVendedores")
-            .textContent = vendedores.length;
+        document.getElementById("totalRecaudo")
+            .textContent = "S/. " + totalGeneral * 5;
 
 
         /*
