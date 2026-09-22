@@ -180,6 +180,11 @@
         .card-recaudo-content > div { 
             flex: 1; 
         }
+
+        .vendidos {
+            text-align: center;
+        }
+
     </style>
 </head>
 
@@ -235,14 +240,15 @@
                     <thead>
                         <tr>
                             <th>Vendedor</th>
-                            <th>Números vendidos</th>
+                            <th>Tickets vendidos</th>
+                            <th>Recaudo</th>
                         </tr>
                     </thead>
 
                     <tbody id="tablaVentas">
 
                         <tr>
-                            <td colspan="2" class="loading">
+                            <td colspan="3" class="loading">
                                 Cargando información...
                             </td>
                         </tr>
@@ -253,7 +259,8 @@
 
                         <tr class="total-row">
                             <td>TOTAL GENERAL</td>
-                            <td id="totalTabla">0</td>
+                            <td id="totalTabla" class="vendidos">0</td>
+                            <td id="totalPersonal">0</td>
                         </tr>
 
                     </tfoot>
@@ -394,26 +401,17 @@
          * Total general
          */
 
-        const totalGeneral =
-            vendedores.reduce(
-                (total, vendedor) =>
-                    total + vendedor.cantidad,
-                0
-            );
+        const totalGeneral = vendedores.reduce((total, vendedor) => total + vendedor.cantidad,0);
 
 
         /*
          * Actualizar tarjetas
          */
 
-        document.getElementById("totalVentas")
-            .textContent = totalGeneral;
-
-        document.getElementById("totalTabla")
-            .textContent = totalGeneral;
-
-        document.getElementById("totalRecaudo")
-            .textContent = "S/. " + totalGeneral * 5;
+        document.getElementById("totalVentas").textContent = totalGeneral;
+        document.getElementById("totalTabla").textContent = totalGeneral;
+        document.getElementById("totalPersonal").textContent = "S/. " + totalGeneral * 5;
+        document.getElementById("totalRecaudo").textContent = "S/. " + totalGeneral * 5;
 
 
         /*
@@ -450,27 +448,25 @@
 
     function construirTabla(vendedores) {
 
-        const tbody =
-            document.getElementById("tablaVentas");
-
+        const tbody = document.getElementById("tablaVentas");
         tbody.innerHTML = "";
 
 
         vendedores.forEach(vendedor => {
-
-            const fila =
-                document.createElement("tr");
-
+            const fila = document.createElement("tr");
 
             fila.innerHTML = `
-
                 <td>
                     ${escapeHtml(vendedor.vendedor)}
                 </td>
-
-                <td>
+                <td class="vendidos">
                     <strong>
                         ${vendedor.cantidad}
+                    </strong>
+                </td>
+                <td>
+                    <strong>
+                        ${vendedor.cantidad * 5}
                     </strong>
                 </td>
 
